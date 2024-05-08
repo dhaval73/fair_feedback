@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Card, CardDescription, CardFooter, CardHeader } from './ui/card'
+import { Card, CardDescription } from './ui/card'
 import axios from 'axios'
 import { toast } from './ui/use-toast'
 import useMessagesStore from '@/store/messagesStore'

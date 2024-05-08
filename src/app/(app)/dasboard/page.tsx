@@ -6,22 +6,19 @@ import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { AcceptMessageSchema } from '@/schemas/acceptMessageSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React, { useCallback, useEffect, useInsertionEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { User } from 'next-auth'
 import { useSession } from 'next-auth/react'
-import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { toast } from '@/components/ui/use-toast'
-import axios, { AxiosError } from 'axios'
-import { ApiResponse } from '@/types/ApiResponse'
+import axios from 'axios'
 // import MessageCard from '@/components/MessageCard'
-const MessageCard = dynamic(() => import('@/components/MessageCard'), {
-  ssr: false,
-})
+// const MessageCard = dynamic(() => import('@/components/MessageCard'), {
+//   ssr: false,
+// })
 import { Copy } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
-import { usePathname } from 'next/navigation'
+
 
 
 function Dasboard() {
@@ -130,7 +127,7 @@ function Dasboard() {
       </div>
       <Separator className=' mt-5' />
       <div className="flex flex-col gap-3 mt-5">
-        <MessageCard />
+        {/* <MessageCard /> */}
       </div>
     </div>
   )
