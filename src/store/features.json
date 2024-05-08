@@ -1,0 +1,25 @@
+{
+    "key_features": [
+      {
+        "feature": "Transparent Ratings",
+        "description": "Highlighting how FairFeedback ensures transparency by displaying both positive and negative feedback, providing a balanced view.",
+        "icon": "transparent_ratings_icon.png"
+      },
+      {
+        "feature": "Anonymous Posting",
+        "description": "Emphasizing the option for users to post feedback anonymously, encouraging honest expression without fear of judgment.",
+        "icon": "anonymous_posting_icon.png"
+      },
+      {
+        "feature": "Community Engagement",
+        "description": "Showcasing how users can engage with each other through comments, discussions, and support, fostering a sense of belonging.",
+        "icon": "community_engagement_icon.png"
+      },
+      {
+        "feature": "Improvement Opportunities",
+        "description": "Illustrating how businesses and individuals can use feedback to improve and grow, creating a win-win scenario for everyone involved.",
+        "icon": "improvement_opportunities_icon.png"
+      }
+    ]
+  }
+  
