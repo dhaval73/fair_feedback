@@ -7,11 +7,10 @@ import useMessagesStore from '@/store/messagesStore'
 import { Cross2Icon } from '@radix-ui/react-icons'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from './ui/alert-dialog'
 import { Skeleton } from './ui/skeleton'
-import { strict } from 'assert'
+
 
 
 function MessageCard() {
-
     const messages = useMessagesStore((state) => state.messages)
     const setMessages = useMessagesStore((state) => state.setMessages)
     const deleteMessage = useMessagesStore((state) => state.deleteMessage)
