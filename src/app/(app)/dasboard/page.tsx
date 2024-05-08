@@ -1,4 +1,5 @@
 "use client"
+import dynamic from 'next/dynamic'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -14,7 +15,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { toast } from '@/components/ui/use-toast'
 import axios, { AxiosError } from 'axios'
 import { ApiResponse } from '@/types/ApiResponse'
-import MessageCard from '@/components/MessageCard'
+// import MessageCard from '@/components/MessageCard'
+const MessageCard = dynamic(() => import('@/components/MessageCard'), {
+  ssr: false,
+})
 import { Copy } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 import { usePathname } from 'next/navigation'
