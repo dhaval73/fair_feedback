@@ -62,7 +62,7 @@ function MessageCard() {
             }
         } catch (error: any) {
             toast({
-                variant: 'destructive',
+                variant:'destructive',
                 title: "Error",
                 description: error.response?.data?.message
             })

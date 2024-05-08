@@ -1,5 +1,4 @@
 "use client"
-import dynamic from 'next/dynamic'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -21,10 +20,7 @@ import { Separator } from '@/components/ui/separator'
 
 
 
-function Dasboard() {
-  
-  
- 
+function Dasboard():React.ReactElement {
   const { data: Session } = useSession()
   const [acceptMessageStatus, setAcceptMessageStatus] = useState(false)
   const [isAcceptingMessage, setIsAcceptingMessage] = useState(false)
@@ -33,32 +29,31 @@ function Dasboard() {
   const form = useForm<z.infer<typeof AcceptMessageSchema>>({
     resolver: zodResolver(AcceptMessageSchema),
   })
-  const { watch, setValue } = form
-  console.log(watch('acceptmessage'));
-  // const baseUrl = typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_VERCEL_URL || process.env.VERCEL_URL;
-  const feedbackUrl = `${"baseUrl"}/u/${user?.username}`
+  const { setValue } = form
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_VERCEL_URL || process.env.VERCEL_URL;
+  const feedbackUrl = `${baseUrl}/u/${user?.username}`
   const copytoclipbord = async () => {
-    // if (navigator.clipboard) {
-    //   try {
-    //     await navigator.clipboard.writeText(feedbackUrl);
-    //     toast({
-    //       variant: 'default',
-    //       description: 'Copied Successfully'
-    //     });
-    //   } catch (error) {
-    //     toast({
-    //       variant:'destructive',
-    //       description: 'Failed to copy to clipboard'
-    //     });
-    //     console.error('Error copying to clipboard:', error);
-    //   }
-    // } else {
-    //   toast({
-    //     variant: 'destructive',
-    //     description: 'Clipboard API not available'
-    //   });
-    //   console.error('Clipboard API not available');
-    // }
+    if (navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(feedbackUrl);
+        toast({
+          variant: 'default',
+          description: 'Copied Successfully'
+        });
+      } catch (error) {
+        toast({
+          variant:'destructive',
+          description: 'Failed to copy to clipboard'
+        });
+        console.error('Error copying to clipboard:', error);
+      }
+    } else {
+      toast({
+        variant: 'destructive',
+        description: 'Clipboard API not available'
+      });
+      console.error('Clipboard API not available');
+    }
   }
   const changeIsacceptstatus = async () => {
     setAcceptMessageStatus(true)
