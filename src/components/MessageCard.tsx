@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from './ui/card'
 import axios from 'axios'
@@ -68,6 +69,7 @@ function MessageCard() {
             })
         }
     }
+
     function timeAgo(uploadDate: string): string {
         const currentDate: Date = new Date();
         const uploadDateObj: Date = new Date(uploadDate);
