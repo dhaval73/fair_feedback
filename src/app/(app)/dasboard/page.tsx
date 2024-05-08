@@ -1,35 +1,21 @@
 "use client"
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
-import { AcceptMessageSchema } from '@/schemas/acceptMessageSchema'
-import { zodResolver } from '@hookform/resolvers/zod'
 import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 import { useSession } from 'next-auth/react'
 import { toast } from '@/components/ui/use-toast'
 import axios from 'axios'
 import MessageCard from '@/components/MessageCard'
-// const MessageCard = dynamic(() => import('@/components/MessageCard'), {
-//   ssr: false,
-// })
 import { Copy } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
-
-
 
 function Dasboard():React.ReactElement {
   const { data: Session } = useSession()
   const [acceptMessageStatus, setAcceptMessageStatus] = useState(false)
   const [isAcceptingMessage, setIsAcceptingMessage] = useState(false)
-  console.log(Session?.user);
+  // console.log(Session?.user);
   const user = Session?.user
-  const form = useForm<z.infer<typeof AcceptMessageSchema>>({
-    resolver: zodResolver(AcceptMessageSchema),
-  })
-  const { setValue } = form
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_VERCEL_URL || process.env.VERCEL_URL;
   const feedbackUrl = `${baseUrl}/u/${user?.username}`
   const copytoclipbord = async () => {
@@ -92,18 +78,13 @@ function Dasboard():React.ReactElement {
         const res = await axios.get('api/accept-messages')
         if (res.data) {
           console.log(res);
-          setValue('acceptmessage', res.data.isAcceptingMessage)
           setIsAcceptingMessage(res.data.isAcceptingMessage)
         }
       } catch (error) {
         console.log(error);
       }
-    })()
-
-  }, [setValue])
-
-
-
+    })();
+  },[])
 
   return (
     <div className=' w-full flex flex-col px-1 xl:px-56 lg:px-40 md:px-12 max-md:px-24 max-sm:px-2 pt-14 '>
@@ -128,6 +109,7 @@ function Dasboard():React.ReactElement {
           <Switch
             id='accept-message'
             disabled={acceptMessageStatus}
+            defaultChecked={isAcceptingMessage}
             checked={isAcceptingMessage}
             onCheckedChange={changeIsacceptstatus}
           />

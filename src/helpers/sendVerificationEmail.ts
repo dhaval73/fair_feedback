@@ -7,9 +7,9 @@ export async function sendVerificationEmail(
     email: string,
     verifyCode: string,
 ): Promise<ApiResponse> {
-    console.log(username) //TODO remove this
-    console.log(email)
-    console.log(verifyCode)
+    // console.log(username) //TODO remove this
+    // console.log(email)
+    // console.log(verifyCode)
     try {
         const data = await resend.emails.send({
             from: process.env.RESEND_EMAIL_FROM || 'onboarding@resend.dev',
