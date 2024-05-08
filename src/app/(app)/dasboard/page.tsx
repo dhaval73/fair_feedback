@@ -17,8 +17,13 @@ import { ApiResponse } from '@/types/ApiResponse'
 import MessageCard from '@/components/MessageCard'
 import { Copy } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
+import { usePathname } from 'next/navigation'
+
+
 function Dasboard() {
-  const [baseUrl, setBaseUrl] = useState('');
+  
+  
+ 
   const { data: Session } = useSession()
   const [acceptMessageStatus, setAcceptMessageStatus] = useState(false)
   const [isAcceptingMessage, setIsAcceptingMessage] = useState(false)
@@ -29,11 +34,11 @@ function Dasboard() {
   })
   const { watch, setValue } = form
   console.log(watch('acceptmessage'));
-  // const baseUrl = window.location.origin
+  const baseUrl = location.origin
   const feedbackUrl = `${baseUrl}/u/${user?.username}`
   const copytoclipbord = async () => {
     if (typeof window !== 'undefined') {
-    await window.navigator.clipboard.writeText(feedbackUrl)
+    await navigator.clipboard.writeText(feedbackUrl)
     toast({
       variant: 'default',
       description: 'Coppied Successfully'
@@ -87,15 +92,6 @@ function Dasboard() {
 
   }, [setValue])
 
-  useEffect(() => {
-    const getBaseUrl = () => {
-      if (typeof window !== 'undefined') {
-        setBaseUrl(window.location.origin);
-      }
-    };
-
-    getBaseUrl();
-  }, []);
 
 
 
