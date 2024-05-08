@@ -15,15 +15,24 @@ function MessageCard() {
     const setMessages = useMessagesStore((state) => state.setMessages)
     const deleteMessage = useMessagesStore((state) => state.deleteMessage)
     const [isloding, setIsloding] = useState(false)
+    const [nomessages , setNoMessages]=useState(false)
+
     useEffect(() => {
-        if (messages.length === 0) {
+        if (messages.length === 0 && !nomessages) {
             setIsloding(true);
             (async () => {
                 try {
                     const res = await axios.get('api/get-messages')
-                    if (res.data) {
+                    if (res.data.seccess) {
                         console.log(res);
                         setMessages(res.data.messages)
+                    }else{
+                        console.log(res)
+                        setNoMessages(true)
+                        toast({
+                            title:"message",
+                            description:'No Feedbacks Founds 😊'
+                        })
                     }
                 } catch (error: any) {
                     console.log(error.response?.data?.message);
@@ -36,7 +45,7 @@ function MessageCard() {
                 }
             })()
         }
-    }, [setMessages, messages])
+    }, [setMessages, messages,setNoMessages,nomessages])
 
     const handelDelete = async (id: string) => {
         console.log(1234);
@@ -93,7 +102,7 @@ function MessageCard() {
 
     return (
         <div className=' grid md:grid-cols-2 xl:grid-cols-3 gap-3 mb-5'>
-            {isloding ?
+            {isloding && !nomessages ?
                 Array.from({ length: 9 }).map((_, index) => (
                     <div key={index} className="">
                         <Skeleton className="h-[125px] w-full rounded-xl" />
@@ -126,7 +135,6 @@ function MessageCard() {
                         </AlertDialog>
                         <span className=' absolute bottom-2 left-3  text-sm font-thin'>
                         {timeAgo(message.createdAt)}        
-
                         </span>
                     </Card>
                 ))

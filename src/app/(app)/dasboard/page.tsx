@@ -18,6 +18,7 @@ import MessageCard from '@/components/MessageCard'
 import { Copy } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 function Dasboard() {
+  const [baseUrl, setBaseUrl] = useState('');
   const { data: Session } = useSession()
   const [acceptMessageStatus, setAcceptMessageStatus] = useState(false)
   const [isAcceptingMessage, setIsAcceptingMessage] = useState(false)
@@ -28,7 +29,7 @@ function Dasboard() {
   })
   const { watch, setValue } = form
   console.log(watch('acceptmessage'));
-  const baseUrl = window.location.origin
+  // const baseUrl = window.location.origin
   const feedbackUrl = `${baseUrl}/u/${user?.username}`
   const copytoclipbord = async () => {
     await window.navigator.clipboard.writeText(feedbackUrl)
@@ -84,7 +85,15 @@ function Dasboard() {
 
   }, [setValue])
 
+  useEffect(() => {
+    const getBaseUrl = () => {
+      if (typeof window !== 'undefined') {
+        setBaseUrl(window.location.origin);
+      }
+    };
 
+    getBaseUrl();
+  }, []);
 
 
 
