@@ -32,11 +32,13 @@ function Dasboard() {
   // const baseUrl = window.location.origin
   const feedbackUrl = `${baseUrl}/u/${user?.username}`
   const copytoclipbord = async () => {
+    if (typeof window !== 'undefined') {
     await window.navigator.clipboard.writeText(feedbackUrl)
     toast({
       variant: 'default',
       description: 'Coppied Successfully'
     })
+  }
   }
   const changeIsacceptstatus = async () => {
     setAcceptMessageStatus(true)
