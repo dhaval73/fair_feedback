@@ -12,7 +12,7 @@ import { z } from 'zod'
 import { useSession } from 'next-auth/react'
 import { toast } from '@/components/ui/use-toast'
 import axios from 'axios'
-// import MessageCard from '@/components/MessageCard'
+import MessageCard from '@/components/MessageCard'
 // const MessageCard = dynamic(() => import('@/components/MessageCard'), {
 //   ssr: false,
 // })
@@ -35,17 +35,32 @@ function Dasboard() {
   })
   const { watch, setValue } = form
   console.log(watch('acceptmessage'));
-  const baseUrl = location.origin
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_VERCEL_URL || process.env.VERCEL_URL;
   const feedbackUrl = `${baseUrl}/u/${user?.username}`
   const copytoclipbord = async () => {
-    
-    await navigator.clipboard.writeText(feedbackUrl)
-    toast({
-      variant: 'default',
-      description: 'Coppied Successfully'
-    })
- 
+    if (navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(feedbackUrl);
+        toast({
+          variant: 'default',
+          description: 'Copied Successfully'
+        });
+      } catch (error) {
+        toast({
+          variant:'destructive',
+          description: 'Failed to copy to clipboard'
+        });
+        console.error('Error copying to clipboard:', error);
+      }
+    } else {
+      toast({
+        variant: 'destructive',
+        description: 'Clipboard API not available'
+      });
+      console.error('Clipboard API not available');
+    }
   }
+  
   const changeIsacceptstatus = async () => {
     setAcceptMessageStatus(true)
     try {
@@ -127,7 +142,7 @@ function Dasboard() {
       </div>
       <Separator className=' mt-5' />
       <div className="flex flex-col gap-3 mt-5">
-        {/* <MessageCard /> */}
+        <MessageCard />
       </div>
     </div>
   )
