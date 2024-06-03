@@ -13,6 +13,8 @@ import { ApiResponse } from '@/types/ApiResponse'
 import axios from 'axios'
 import { useParams } from 'next/navigation'
 import { Label } from '@/components/ui/label'
+import { Separator } from '@/components/ui/separator'
+
 
 const SendMessages = ({params}:any) => {
   const [sending, setSending] = useState(false)
@@ -63,11 +65,12 @@ const SendMessages = ({params}:any) => {
   }
 
   return (
-    <div className=' w-full md:pt-20  xl:px-64'>
-      <div className="">
-        <h1 className=' text-4xl'>Send Us Your Feedback</h1>
+    <div className=' w-full max-md:pt-8 sm:px-8 md:pt-20 md:px-40 lg:px-48 xl:px-60 px-5'>
+      <div className=" max-sm:mt-5">
+        <h1 className=' text-4xl max-sm:mb-5'>Send Us Your Feedback</h1>
         <p>Please use the form below to send us your feedback. We appreciate hearing from you!</p>
       </div>
+      <Separator className='mt-5' />
       <div className="mt-5">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 ">
