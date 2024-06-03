@@ -7,6 +7,7 @@ export { default } from 'next-auth/middleware';
 const authRoutes = ['/sign-in','/sign-up','/verify-email',]
 const publicRoutes = ['/']
 const protectedRoutes = ['/dasboard']
+// const protectedRoutes = ['/dasboard','/api/create-feedback']
 
 export  async function middleware(request: NextRequest) {
 

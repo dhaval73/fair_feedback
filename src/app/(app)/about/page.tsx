@@ -1,8 +1,8 @@
+
 import { Rocket } from 'lucide-react'
 import Link from 'next/link'
-import React from 'react'
 
-function page() {
+function Page() {
   return (
     <div className=' px-2  xl:px-56  lg:px-32 mt-16 mb-5'>
       <div className=" flex flex-col border rounded-sm p-3 ">
@@ -95,4 +95,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

@@ -12,18 +12,25 @@ import {
 import { Button } from "./ui/button"
 import { User } from "next-auth"
 import { signOut, useSession } from "next-auth/react"
-import { date } from "zod"
 import { ModeToggle } from "./ModeToggle"
 import { Cross1Icon, HamburgerMenuIcon } from "@radix-ui/react-icons"
-import { Separator } from "./ui/separator"
+import { userStore } from "@/store/userStore"
+
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false)
     const toggelMenu = () => {
         setIsMenuOpen((prev) => prev ? false : true)
     }
+    const user = userStore((state)=>state.user)
+    const setUser = userStore((state)=>state.setUser)
     const { data: Session } = useSession()
-    const user: User = Session?.user as User
+    React.useEffect(()=>{
+        console.log("call session")
+        if(Session){
+            setUser(Session.user)
+        }
+    },[Session,setUser])
     // console.log(user);
 
 

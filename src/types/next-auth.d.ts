@@ -12,7 +12,7 @@ declare module "next-auth" {
     }
 
     interface User {
-        _id?: string;
+        _id?: string; 
         username?: string;
         isVerified?: boolean;
         isAcceptingMessage?: boolean;

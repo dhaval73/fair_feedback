@@ -1,12 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Card, CardDescription } from './ui/card'
+import { Card, CardDescription } from '@/components/ui/card'
 import axios from 'axios'
-import { toast } from './ui/use-toast'
+import { toast } from '@/components/ui/use-toast'
 import useMessagesStore from '@/store/messagesStore'
 import { Cross2Icon } from '@radix-ui/react-icons'
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from './ui/alert-dialog'
-import { Skeleton } from './ui/skeleton'
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
+import { Skeleton } from '@/components/ui/skeleton'
+
 
 
 
@@ -16,7 +17,8 @@ function MessageCard() {
     const deleteMessage = useMessagesStore((state) => state.deleteMessage)
     const [isloding, setIsloding] = useState(false)
     const [nomessages , setNoMessages]=useState(false)
-
+    
+    
     useEffect(() => {
         if (messages.length === 0 && !nomessages) {
             setIsloding(true);
@@ -48,7 +50,6 @@ function MessageCard() {
     }, [setMessages, messages,setNoMessages,nomessages])
 
     const handelDelete = async (id: string) => {
-        console.log(1234);
         try {
             const res = await axios.delete(`api/delete-message/${id}`)
             console.log(res);
@@ -140,7 +141,6 @@ function MessageCard() {
                     </Card>
                 ))
             }
-
         </div>
     )
 }

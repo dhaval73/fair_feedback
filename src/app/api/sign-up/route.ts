@@ -58,7 +58,7 @@ export async function POST(request: Request) {
                 verifyCode,
                 verifyCodeExpire,
                 isVerified: false,
-                messages: []
+                feedbacks:[]
             })
             await newUser.save();
         }
