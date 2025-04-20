@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -37,6 +38,7 @@
     "mongoose": "^8.3.2",
     "next": "14.2.2",
     "next-auth": "^4.24.7",
+    "next-sitemap": "^4.2.3",
     "next-themes": "^0.3.0",
     "openai": "^4.38.3",
     "react": "^18",

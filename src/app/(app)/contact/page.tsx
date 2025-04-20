@@ -1,58 +1,20 @@
-"use client"
-import { contactSchema } from "@/schemas/contactSchema"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import ContactForm from "@/components/assets/ContactForm"
 import { Separator } from "@/components/ui/separator"
-import { Loader2, Mail, Phone } from "lucide-react"
-import axios from "axios"
-import { toast } from "@/components/ui/use-toast"
-import { useState } from "react"
-const ContactPage = () => {
-  const [sending, setSending] = useState(false)
-  const form = useForm<z.infer<typeof contactSchema>>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: {
-      fullname: "",
-      mobileno: "",
-      message: ""
-    },
-  })
+import { Mail, Phone } from "lucide-react"
+import { Metadata } from "next";
 
-  async function onSubmit(data: z.infer<typeof contactSchema>) {
-
-    console.log(data)
-    setSending(true)
-    try {
-      const res = await axios.post('/api/contact/',data)
-      console.log(res)
-      if (res.data.success){
-        toast({
-          variant:'default',
-          description : 'Your Response send successfully'
-        })
-      }
-    } catch (error:any) {
-      console.log(error)
-      toast({
-        variant:'destructive',
-        description:error.response.data.message
-      })
-    } finally{
-      setSending(false)
-    }
+export const metadata: Metadata = {
+  title: "Contact Fair Feedback - Get in Touch",
+  description: "Need help or have questions? Contact the Fair Feedback team for support.",
+  keywords: ["contact fair feedback", "support", "feedback contact"],
+  authors: [{ name: "Dhaval Dharaviya" }],
+  robots: "index, follow",
+  alternates: {
+    canonical: "https://fair-feedback.vercel.app/contact",
   }
+};
+
+const ContactPage = () => {
   return (
     <div className=' px-2  xl:px-56  lg:px-32 mt-16 mb-5 '>
       <div className="text-center ">
@@ -75,64 +37,7 @@ const ContactPage = () => {
         </div>
         <Separator className=" sm:hidden" />
         <div className=" max-w-sm w-1/2 max-sm:w-full">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="fullname"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Full name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your full name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="mobileno"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Mobile no</FormLabel>
-                    <FormControl>
-                      <Input placeholder="+91 94088XXXXX" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Leave you message</FormLabel>
-                    <FormControl>
-                      <Textarea placeholder="enter your message" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button
-                variant='outline'
-                type="submit"
-                disabled={sending}
-              >
-                {
-                  sending ? <>
-                   <Loader2 className=" mr-2 h-4 w-4 animate-spin" />
-                   Sending
-                  </> :
-                  'Submit'
-                }
-                
-              
-              </Button>
-            </form>
-          </Form>
+          <ContactForm/>
         </div>
       </div>
     </div>
